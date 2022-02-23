@@ -19,7 +19,7 @@ on:
 jobs:
   manual-test:
     name: Manual Benchmark Test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: ${{ github.event_name == 'workflow_dispatch' }}
     strategy:
       fail-fast: false
@@ -48,7 +48,7 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d-%H.%M.%S')"
         
       - name: Run Benchmark Tests
-        uses: layer5io/meshery-smp-action@master
+        uses: layer5io/meshery-smp-action@self-hosted
         with:
           provider_token: ${{ secrets.MESHERY_TOKEN }}
           platform: docker
@@ -61,7 +61,7 @@ jobs:
 
   scheduled-test:
     name: Scheduled Benchmark Test
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: ${{ github.event_name == 'schedule' }}
     strategy:
       fail-fast: false
@@ -91,7 +91,7 @@ jobs:
         run: echo "::set-output name=date::$(date +'%Y-%m-%d-%H.%M.%S')"
         
       - name: Run Benchmark Tests
-        uses: layer5io/meshery-smp-action@master
+        uses: layer5io/meshery-smp-action@self-hosted
         with:
           provider_token: ${{ secrets.MESHERY_TOKEN }}
           platform: docker
