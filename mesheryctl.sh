@@ -66,6 +66,8 @@ main() {
 		echo "Running test with test configuration file $perf_filename"
 		mesheryctl perf apply --file $GITHUB_WORKSPACE/.github/$perf_filename -t ~/auth.json --url "$endpoint_url" --mesh "$service_mesh" --name "$test_name" --load-generator "$load_generator" $perf_profile_name --yes
 	fi
+
+	minikube delete
 }
 
 parse_command_line() {
