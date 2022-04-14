@@ -40,7 +40,7 @@ jobs:
         with:
           minikube version: 'v1.23.2'
           kubernetes version: 'v1.22.2'
-          driver: docker
+          driver: none
 
       - name: Checkout Code
         uses: actions/checkout@v2
