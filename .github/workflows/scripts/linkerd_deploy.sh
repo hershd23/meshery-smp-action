@@ -14,13 +14,15 @@ if ! [ -x "$(command -v mesheryctl)" ]; then
     curl -L https://meshery.io/install | ADAPTERS=linkerd PLATFORM=kubernetes bash -
 fi
 
-curl -fsL https://run.linkerd.io/emojivoto.yml --output emojivoto.yml
+# curl -fsL https://run.linkerd.io/emojivoto.yml --output emojivoto.yml
+
 sleep 10
-mesheryctl system login --provider None
-mesheryctl mesh deploy adapter meshery-linkerd:10001
+# mesheryctl system login --provider None
+# mesheryctl mesh deploy adapter meshery-linkerd:10001
+echo 'E' | mesheryctl mesh deploy adapter meshery-linkerd:10001 --token "./.github/workflows/auth.json"
 echo "Onboarding application... Standby for few minutes..."
-mesheryctl app onboard -f "./emojivoto.yml"
-#mesheryctl pattern apply -f "./emojivoto.yml" 
+# mesheryctl app onboard -f "./emojivoto.yml"
+mesheryctl pattern apply -f "https://raw.githubusercontent.com/hershd23/service-mesh-patterns/add_samples/samples/emojivoto.yaml" --token "./.github/workflows/auth.json" 
 
 # Wait for the application to be ready
 sleep 100
