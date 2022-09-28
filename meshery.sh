@@ -31,6 +31,9 @@ main() {
 		echo '{ "meshery-provider": "Meshery", "token": null }' | jq -c '.token = "'$provider_token'"' > ~/auth.json
 	fi
 	cat ~/auth.json
+	
+	echo "Meshery Version"
+	mesheryctl version
 
 	kubectl config view --minify --flatten > ~/minified_config
 	mv ~/minified_config ~/.kube/config
